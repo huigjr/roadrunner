@@ -6,7 +6,7 @@ class PageModel{
   
   public function __construct($slug){
     $this->slug = $slug;
-    $this->db = new Connection(DB_HOST, DB_NAME, DB_USER, DB_PASS);
+    $this->db = new Database(DB_HOST, DB_NAME, DB_USER, DB_PASS);
   }
 
   public function getPage(){

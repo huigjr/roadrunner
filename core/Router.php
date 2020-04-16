@@ -1,12 +1,15 @@
 <?php
 class Router{
 
-  private $controllerdir = ROOT.'/controllers/';
-  public $controller;
+  private $di;
+  private $db;
   
+  public $controller;
   public $path;
   
-  public function __construct(){
+  public function __construct($di){
+    $this->di = $di;
+    $this->db = $this->di->get('Database', [DB_HOST, DB_NAME, DB_USER, DB_PASS]);
     $this->path = $this->parseUrlPath();
     $this->controller = $this->getController();
   }
@@ -40,7 +43,7 @@ class Router{
   }
 
   private function findController(){
-    return array_diff(scandir($this->controllerdir), array('.', '..'));
+    return array_diff(scandir(ROOT.'/controllers/'), array('.', '..'));
   }
 
   // Return 404 page in case routing cannot be resolved

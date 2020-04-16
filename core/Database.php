@@ -1,5 +1,5 @@
 <?php
-class Connection{
+class Database{
 
   private $pdo;
   private $host;
