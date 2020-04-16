@@ -33,8 +33,8 @@ ALTER DATABASE `cms_data` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 CREATE TABLE IF NOT EXISTS `pages` (
   `pageid` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) DEFAULT NULL,
   `url` varchar(64) DEFAULT NULL,
+  `name` varchar(64) DEFAULT NULL,
   `content` varchar(1024) DEFAULT NULL,
   `active` tinyint(1) DEFAULT 1,
   PRIMARY KEY (`pageid`)

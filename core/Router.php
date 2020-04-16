@@ -2,11 +2,13 @@
 class Router{
 
   private $controllerdir = ROOT.'/controllers/';
+  public $controller;
   
   public $path;
   
   public function __construct(){
     $this->path = $this->parseUrlPath();
+    $this->controller = $this->getController();
   }
 
   // Check is URL structure meets requirements and return path parts
@@ -25,12 +27,13 @@ class Router{
         $path = array_shift($this->path);
         return $this->startController($path, $this->path) ?? null;
       }
-    }
+    } else return $this->startController('page', '/');
   }
   
   private function startController($path, $array = null){
     try{
-      return new ucfirst($path).'Controller'($array);
+      $class = ucfirst($path).'Controller';
+      return new $class($array);
     } catch(Exception $e) {
       return null;
     }
