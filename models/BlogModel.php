@@ -13,7 +13,7 @@ class BlogModel{
     if($this->slug){
       return $this->db->getRow("SELECT * FROM `blog` WHERE `url` = :url", array('url' => $this->slug));
     } else {
-      return ['title' => 'Blog', 'content' => '<a href="blog/youre-not-that-busy">You’re not that busy. Here’s how to make time for what you love</a>'];
+      return ['title' => 'Blog', 'content' => '<a href="blog/youre-not-that-busy">You’re not that busy. Make time for what you love</a>'];
     }
   }
 }

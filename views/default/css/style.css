@@ -22,6 +22,15 @@ p{
   font-size:18px;
 }
 
+h2{
+  margin-bottom:20px;
+}
+
+ul{
+  font-size:18px;
+  line-height:26px;
+}
+
 header{
   width:95%;
 	max-width:800px;
@@ -38,6 +47,10 @@ div{
 	margin:50px auto;
 	text-align:left;
 	line-height:24px;
+}
+
+div ul{
+  margin-left:20px;
 }
 
 /*************************/
