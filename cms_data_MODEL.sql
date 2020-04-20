@@ -34,10 +34,39 @@ ALTER DATABASE `cms_data` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 CREATE TABLE IF NOT EXISTS `pages` (
   `pageid` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `url` varchar(64) DEFAULT NULL,
-  `name` varchar(64) DEFAULT NULL,
-  `content` varchar(1024) DEFAULT NULL,
+  `title` varchar(64) DEFAULT NULL,
+  `content` varchar(4096) DEFAULT NULL,
   `active` tinyint(1) DEFAULT 1,
   PRIMARY KEY (`pageid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `blog`
+--
+
+CREATE TABLE IF NOT EXISTS `blog` (
+  `blogid` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `url` varchar(64) DEFAULT NULL,
+  `title` varchar(64) DEFAULT NULL,
+  `content` varchar(10240) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT 1,
+  PRIMARY KEY (`blogid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `userid` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `username` varchar(64) DEFAULT NULL,
+  `userpassword` varchar(64) DEFAULT NULL,
+  `userlevel` tinyint(3) UNSIGNED DEFAULT 1,
+  PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------

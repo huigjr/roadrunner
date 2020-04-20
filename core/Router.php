@@ -9,6 +9,7 @@ class Router{
   
   public function __construct($di){
     $this->di = $di;
+    $this->di->get('Session');
     $this->db = $this->di->get('Database', [DB_HOST, DB_NAME, DB_USER, DB_PASS]);
     $this->path = $this->parseUrlPath();
     $this->controller = $this->getController();
@@ -25,10 +26,10 @@ class Router{
   private function getController(){
     if($this->path){
       if(count($this->path) === 1){
-        return $this->startController($this->path) ?? $this->startController('page', [$this->path]) ?? null;
+        return $this->startController($this->path[0]) ?? $this->startController('page', [$this->path]) ?? null;
       } else {
         $path = array_shift($this->path);
-        return $this->startController($path, $this->path) ?? null;
+        return $this->startController($path, $this->path[0]) ?? null;
       }
     } else return $this->startController('page', '/');
   }
