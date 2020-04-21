@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="NL">
+<head>
+	<title><?=$name?></title>
+	<base href="<?=$base?>" target="_self">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="css/fonts.css" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Muli:400,700" rel="stylesheet"> 
+</head>
+<body>
+
+<header>
+	<h1><?=$name?></h1>
+</header>
+
+<div class="content">
+
+	<div class="screenleft">
+		<nav class="contentbox">
+			<ul>
+				<li><a href="/"><span class="icon-home"></span>Home</a></li>
+				<li><a href="organisatie/"><span class="icon-structure"></span>Organisatie</a></li>
+				<li><a href="relatiebeheer/"><span class="icon-crm"></span>Relatiebeheer</a></li>
+				<li><a href="mailbox/"><span class="icon-mail"></span>Mailbox</a></li>
+				<li><a href="tickets/"><span class="icon-tickets"></span>Tickets</a></li>
+				<li><a href="/"><span class="icon-tasks"></span>Taken</a></li>
+				<li><a href="/"><span class="icon-calendar"></span>Agenda</a></li>
+				<li><a href="/"><span class="icon-chat"></span>Berichten</a></li>
+				<li><a href="/"><span class="icon-settings"></span>Instellingen</a></li>
+				<li><a href="/"><span class="icon-logout"></span>Uitloggen</a></li>
+			</ul>
+		</nav>
+	</div>
+	
+	<div class="screenright">
+
+		<div id="result" class="contentbox">
+			<h2>Relatiebeheer</h2> 
+			<div id="flexrow">
+				<div class="box" data-id="1" style="background:#9b59b6">
+					<div class="title">box 1</div>
+					<div class="peopledrop"></div>
+					<div class="dropzone"></div>
+				</div>
+				<div class="box" data-id="2" style="background:#e74c3c">
+					<div class="title">box 2</div>
+					<div class="peopledrop"></div>
+					<div class="dropzone"></div>
+				</div>
+				<div class="box" data-id="3" style="background:#e67e22">
+					<div class="title">box 3</div>
+					<div class="peopledrop"></div>
+					<div class="dropzone"></div>
+				</div>
+				<div class="box" data-id="4" style="background:#3498db">
+					<div class="title">box 4</div>
+					<div class="peopledrop"></div>
+					<div class="dropzone"></div>
+				</div>
+				<div class="box" data-id="5" style="background:#9b59b6">
+					<div class="title">box 5</div>
+					<div class="peopledrop"></div>
+					<div class="dropzone"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="contentbox">
+			<h2>Vrij Personeel</h2>
+			<div id="personel" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<img class="mugshot" src="img/pic.gif" alt="x" draggable="true" ondragstart="drag(event)" id="drag1">
+				<img class="mugshot" src="img/pic.gif" alt="x" draggable="true" ondragstart="drag(event)" id="drag2">
+				<img class="mugshot" src="img/pic.gif" alt="x" draggable="true" ondragstart="drag(event)" id="drag3">
+				<img class="mugshot" src="img/pic.gif" alt="x" draggable="true" ondragstart="drag(event)" id="drag4">
+				<img class="mugshot" src="img/pic.gif" alt="x" draggable="true" ondragstart="drag(event)" id="drag5">
+				<img class="mugshot" src="img/pic.gif" alt="x" draggable="true" ondragstart="drag(event)" id="drag6">
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<footer>
+<?=$executiontime?>
+</footer>
+<script src="/js/Sortable.min.js"></script>
+<script>
+var sort = Sortable.create(document.getElementById("flexrow"),{ group:'one',animation: 150});
+var x = document.getElementsByClassName("dropzone");
+for (var i = 0; i < x.length; i++) { var sort = Sortable.create(x[i],{ group:'one',animation: 150}); }
+var sort = Sortable.create(document.getElementById("personel"),{ group:'two',animation: 150});
+var y = document.getElementsByClassName("peopledrop");
+for (var i = 0; i < y.length; i++) { var sort = Sortable.create(y[i],{ group:'two',animation: 150}); }
+
+document.addEventListener("dragstart", function(e){
+	if(e.target.tagName == 'DIV'){
+		var x = document.getElementsByClassName("dropzone");
+		for (var i = 0; i < x.length; i++) { x[i].style.border = "1px dashed #fff";x[i].style.minHeight = "100px" } 
+	} else {
+		var x = document.getElementsByClassName("peopledrop");
+		for (var i = 0; i < x.length; i++) { x[i].style.border = "1px dashed #fff";x[i].style.minHeight = "100px" } 
+	}
+});
+
+document.addEventListener("dragend", function(){
+	var x = document.getElementsByClassName("dropzone");
+	for (var i = 0; i < x.length; i++) { x[i].style.border = "0";x[i].style.minHeight = "10px" } 
+	var y = document.getElementsByClassName("peopledrop");
+	for (var i = 0; i < y.length; i++) { y[i].style.border = "0";y[i].style.minHeight = "10px" } 
+	console.log(document.getElementById("flexrow").innerHTML);
+});
+
+function toggleDrop(el,ev){
+
+}
+
+var totaal = {};
+var recursive = function(e){
+	var ding = [];
+	for (var i = 0; i < e.length; i++) {
+		ding[i] = e.classList.contains("box") ? recursive(e[i]) : e.dataset.id;
+	}
+}
+</script>
+</body>
+</html>

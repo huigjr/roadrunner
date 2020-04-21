@@ -37,7 +37,7 @@ class Router{
   private function startController($path, $array = null){
     try{
       $class = ucfirst($path).'Controller';
-      return new $class($array);
+      return new $class($this->di, $array);
     } catch(Exception $e) {
       return null;
     }

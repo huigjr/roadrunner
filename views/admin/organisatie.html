@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="NL">
+<head>
+	<title><?=$name?></title>
+	<base href="<?=$base?>" target="_self">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="css/fonts.css" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Muli:400,700" rel="stylesheet"> 
+</head>
+<body>
+
+<header>
+	<h1><?=$name?></h1>
+</header>
+
+<div class="content">
+
+	<div class="screenleft">
+		<nav class="contentbox">
+			<ul>
+				<li><a href="/"><span class="icon-home"></span>Home</a></li>
+				<li><a href="organisatie/"><span class="icon-structure"></span>Organisatie</a></li>
+				<li><a href="relatiebeheer/"><span class="icon-crm"></span>Relatiebeheer</a></li>
+				<li><a href="mailbox/"><span class="icon-mail"></span>Mailbox</a></li>
+				<li><a href="tickets/"><span class="icon-tickets"></span>Tickets</a></li>
+				<li><a href="/"><span class="icon-tasks"></span>Taken</a></li>
+				<li><a href="/"><span class="icon-calendar"></span>Agenda</a></li>
+				<li><a href="/"><span class="icon-chat"></span>Berichten</a></li>
+				<li><a href="/"><span class="icon-settings"></span>Instellingen</a></li>
+				<li><a href="/"><span class="icon-logout"></span>Uitloggen</a></li>
+			</ul>
+		</nav>
+	</div>
+	
+	<div class="screenright">
+
+		<div id="result" class="contentbox">
+			<h2>Organisatiebeheer</h2> 
+			<div id="flexrow">
+				<div class="box" data-id="1" style="background:#9b59b6">
+					<div class="orgtitle">Management</div>
+					<div class="peopledrop"></div>
+					<div class="groupdrop"></div>
+				</div>
+				<div class="box" data-id="2" style="background:#e74c3c">
+					<div class="orgtitle">Sales</div>
+					<div class="peopledrop"></div>
+					<div class="groupdrop"></div>
+				</div>
+				<div class="box" data-id="3" style="background:#e67e22">
+					<div class="orgtitle">Administratie</div>
+					<div class="peopledrop"></div>
+					<div class="groupdrop"></div>
+				</div>
+				<div class="box" data-id="4" style="background:#3498db">
+					<div class="orgtitle">Development</div>
+					<div class="peopledrop"></div>
+					<div class="groupdrop"></div>
+				</div>
+				<div class="box" data-id="5" style="background:#2ecc71">
+					<div class="orgtitle">Helpdesk</div>
+					<div class="peopledrop"></div>
+					<div class="groupdrop"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="contentbox">
+			<h2>Vrij Personeel</h2>
+			<div id="personel">
+				<img class="mugshot" src="img/pic.gif" alt="x" data-id="1">
+				<img class="mugshot" src="img/pic.gif" alt="x" data-id="2">
+				<img class="mugshot" src="img/pic.gif" alt="x" data-id="3">
+				<img class="mugshot" src="img/pic.gif" alt="x" data-id="4">
+				<img class="mugshot" src="img/pic.gif" alt="x" data-id="5">
+				<img class="mugshot" src="img/pic.gif" alt="x" data-id="6">
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<footer>
+<?=$executiontime?>
+</footer>
+<script src="/js/Sortable.min.js"></script>
+<script>
+
+createSort('flexrow','groupdrop','a');
+createSort('personel','peopledrop','b');
+document.addEventListener("dragstart",function(e){if(e.target.tagName == 'DIV'){toggleDrop('groupdrop','start')}else{toggleDrop('peopledrop','start')}});
+document.addEventListener("dragend", function(){
+	toggleDrop('groupdrop','end');
+	toggleDrop('peopledrop','end');
+	console.log(document.getElementById("flexrow").innerHTML);
+});
+function createSort(containerid,classname,groupname){var sort = Sortable.create(document.getElementById(containerid),{group:groupname,animation:150});var x = document.getElementsByClassName(classname);for(var i=0;i<x.length;i++){var sort = Sortable.create(x[i],{group:groupname,animation:150})}}
+function toggleDrop(classname,event){var x = document.getElementsByClassName(classname);for(var i=0;i<x.length;i++){if(event == 'start'){x[i].style.border="1px dashed #fff";x[i].style.minHeight="100px"}else{x[i].style.border="0";x[i].style.minHeight = "10px"}}}
+
+
+</script>
+</body>
+</html>

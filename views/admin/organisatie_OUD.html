@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="NL">
+<head>
+	<title><?=$name?></title>
+	<base href="<?=$base?>" target="_self">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="css/fonts.css" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Muli:400,700" rel="stylesheet"> 
+</head>
+<body>
+
+<header>
+	<h1><?=$name?></h1>
+</header>
+
+<div class="content">
+
+	<div class="screenleft">
+		<nav class="contentbox">
+			<ul>
+				<li><a href="/"><span class="icon-home"></span>Home</a></li>
+				<li><a href="organisatie/"><span class="icon-structure"></span>Organisatie</a></li>
+				<li><a href="relatiebeheer/"><span class="icon-crm"></span>Relatiebeheer</a></li>
+				<li><a href="mailbox/"><span class="icon-mail"></span>Mailbox</a></li>
+				<li><a href="tickets/"><span class="icon-tickets"></span>Tickets</a></li>
+				<li><a href="/"><span class="icon-tasks"></span>Taken</a></li>
+				<li><a href="/"><span class="icon-calendar"></span>Agenda</a></li>
+				<li><a href="/"><span class="icon-chat"></span>Berichten</a></li>
+				<li><a href="/"><span class="icon-settings"></span>Instellingen</a></li>
+				<li><a href="/"><span class="icon-logout"></span>Uitloggen</a></li>
+			</ul>
+		</nav>
+	</div>
+	
+	<div class="screenright">
+		<div class="contentbox">
+			<?=$content?>
+			<div class="flexrow">
+				<div class="orgbox color-turqoise">
+					<div class="orgtitle">Group 1</div>
+					<div class="orgdrop" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+				</div>
+				<div class="orgbox color-alizarin">
+					<div class="orgtitle">Group 2</div>
+					<div class="orgdrop" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+				</div>
+				<div class="orgbox color-carrot">
+					<div class="orgtitle">Group 3</div>
+					<div class="orgdrop" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="contentbox">
+			<h2>Vrij Personeel</h2>
+			<div id="personel" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<img class="mugshot" src="img/pic.gif" alt="x" draggable="true" ondragstart="drag(event)" id="drag1">
+				<img class="mugshot" src="img/pic.gif" alt="x" draggable="true" ondragstart="drag(event)" id="drag2">
+				<img class="mugshot" src="img/pic.gif" alt="x" draggable="true" ondragstart="drag(event)" id="drag3">
+				<img class="mugshot" src="img/pic.gif" alt="x" draggable="true" ondragstart="drag(event)" id="drag4">
+				<img class="mugshot" src="img/pic.gif" alt="x" draggable="true" ondragstart="drag(event)" id="drag5">
+				<img class="mugshot" src="img/pic.gif" alt="x" draggable="true" ondragstart="drag(event)" id="drag6">
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<footer>
+<?=$executiontime?>
+</footer>
+<script>
+function allowDrop(ev){if(ev.target.tagName != 'IMG') ev.preventDefault();}
+function drag(ev){ev.dataTransfer.setData("text", ev.target.id);}
+function drop(ev) {
+	ev.preventDefault();
+	var data = ev.dataTransfer.getData("text");
+	ev.target.appendChild(document.getElementById(data));
+}
+</script>
+</body>
+</html>
