@@ -20,6 +20,10 @@ class BaseController{
     // Base function
   }
 
+  public function createForm(){
+    extract($this->model);
+  }
+
   public function getTemplate(){
     return new Template(ROOT.'/views/'.$this->template.'/'.$this->view, (array)$this->model);
   }

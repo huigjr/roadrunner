@@ -2,17 +2,12 @@
 class Router{
 
   private $di;
-  private $db;
-  
   public $controller;
-  public $path;
-  
-  public function __construct($di){
-    $this->di = $di;
+
+  public function __construct(){
+    $this->di = new DI();
     $this->di->get('Session');
-    $this->db = $this->di->get('Database', [DB_HOST, DB_NAME, DB_USER, DB_PASS]);
-    $this->path = $this->parseUrlPath();
-    $this->controller = $this->getController();
+    $this->controller = $this->getController($this->parseUrlPath());
   }
 
   // Check is URL structure meets requirements and return path parts
@@ -23,13 +18,13 @@ class Router{
     }
   }
   
-  private function getController(){
-    if($this->path){
-      if(count($this->path) === 1){
-        return $this->startController($this->path[0]) ?? $this->startController('page', [$this->path]) ?? null;
+  private function getController($path){
+    if($path){
+      if(count($path) === 1){
+        return $this->startController($path[0]) ?? $this->startController('page', [$path]) ?? null;
       } else {
-        $path = array_shift($this->path);
-        return $this->startController($path, $this->path[0]) ?? null;
+        $firstpath = array_shift($path);
+        return $this->startController($firstpath, $path) ?? null;
       }
     } else return $this->startController('page', '/');
   }

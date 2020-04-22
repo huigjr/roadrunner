@@ -32,7 +32,10 @@
 	
 	<div class="screenright">
 		<div class="contentbox">
-			<?=$content?>
+			<h2>Pages</h2>
+      <?php foreach($list as $page):?>
+        <a href="dashboard/cms/<?=$page['pageid']?>">TEST</a>
+      <?php endforeach;?>
 		</div>
 	</div>
 
