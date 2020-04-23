@@ -13,7 +13,8 @@ class DashboardController extends BaseController{
       $model = str_replace('cms','page',$model);
       $this->view = $this->slug ? $model.'edit.html' : $model.'list.html';
       $model = ucfirst($model).'Model';
-      $this->model = new $model($this->di, $this->slug);
+      $id = array_shift($this->slug);
+      $this->model = new $model($this->di, $id, $this->slug);
     }
   }
   

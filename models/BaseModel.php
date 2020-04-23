@@ -5,7 +5,7 @@ class BaseModel{
   protected $di;
   protected $slug;
 
-  public function __construct($di, $slug){
+  public function __construct($di, $slug, $vars = null){
     $this->di   = $di;
     $this->slug = $slug;
     $this->db   = $this->di->get('Database', [DB_HOST, DB_NAME, DB_USER, DB_PASS]);

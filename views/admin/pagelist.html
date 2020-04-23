@@ -22,9 +22,9 @@
 	<div class="screenleft">
 		<nav class="contentbox">
 			<ul>
-				<li><a href="/"><span class="icon-home"></span>Home</a></li>
+				<li><a href="dashboard"><span class="icon-home"></span>Home</a></li>
 				<li><a href="dashboard/cms"><span class="icon-crm"></span>CMS</a></li>
-				<li><a href="/"><span class="icon-settings"></span>Settings</a></li>
+				<li><a href="dashboard/blog"><span class="icon-settings"></span>Settings</a></li>
 				<li><a href="/"><span class="icon-logout"></span>Logout</a></li>
 			</ul>
 		</nav>
@@ -34,7 +34,7 @@
 		<div class="contentbox">
 			<h2>Pages</h2>
       <?php foreach($list as $page):?>
-        <a href="dashboard/cms/<?=$page['pageid']?>">TEST</a>
+        <a href="dashboard/cms/<?=$page['pageid']?>"><?=$page['title']?></a>
       <?php endforeach;?>
 		</div>
 	</div>

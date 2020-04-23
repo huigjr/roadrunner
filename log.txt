@@ -1,1 +1,0 @@
-21-04-2020 11:51:47|Connection failed: SQLSTATE[HY000] [1045] Access denied for user 'kkdbadmin'@'localhost' (using password: YES)
