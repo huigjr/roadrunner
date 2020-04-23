@@ -32,9 +32,9 @@
 	
 	<div class="screenright">
 		<div class="contentbox">
-			<h2>Pages</h2>
-      <?php foreach($list as $page):?>
-        <a href="dashboard/cms/<?=$page['pageid']?>"><?=$page['title']?></a>
+			<h2>Blogs</h2>
+      <?php foreach($list as $blog):?>
+        <a href="dashboard/blog/<?=$blog['blogid']?>"><?=$blog['title']?></a>
       <?php endforeach;?>
 		</div>
 	</div>
