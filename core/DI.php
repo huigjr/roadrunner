@@ -1,17 +1,22 @@
 <?php
-class DI{
 
-  private $service = array();
+class DI
+{
 
-  public function get($object, $args=null, $alias=null){
-    return empty($this->service[$alias ?: $object]) ? $this->instance($object,$args) : $this->service[$alias ?: $object];
-	}
+    private $service = array();
 
-  public function kill($instance){
-    if(!empty($this->service[$instance])) $this->service[$instance] = null;
-  }
+    public function get($object, $args = null, $alias = null)
+    {
+        return empty($this->service[$alias ?: $object]) ? $this->instance($object, $args) : $this->service[$alias ?: $object];
+    }
 
-  private function instance($object, $args=null){
-    return $args ? new $object(...$args) : new $object($this);
-  }
+    public function kill($instance)
+    {
+        if (!empty($this->service[$instance])) $this->service[$instance] = null;
+    }
+
+    private function instance($object, $args = null)
+    {
+        return $args ? new $object(...$args) : new $object($this);
+    }
 }

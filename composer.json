@@ -1,17 +1,25 @@
 {
-    "name": "huigjr/roadrunner",
-    "type": "project",
-    "license": "proprietary",
-    "minimum-stability": "stable",
-	"authors": [
-        {
-            "name": "Huig van der Luijt",
-            "email": "huigjr@gmail.com"
-        }
-    ],
-    "require": {},
-	"autoload": {
-        "classmap": ["controllers/","models/","core/"],
-		"files": ["config/config.php"]
+  "name": "huigjr/roadrunner",
+  "type": "project",
+  "license": "proprietary",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "Huig van der Luijt",
+      "email": "huigjr@gmail.com"
     }
+  ],
+  "require": {
+    "ext-pdo": "*"
+  },
+  "autoload": {
+    "classmap": [
+      "controllers/",
+      "models/",
+      "core/"
+    ],
+    "files": [
+      "config/config.php"
+    ]
+  }
 }
