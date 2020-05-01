@@ -4,59 +4,49 @@ class BaseModel
 {
 
     protected $db;
-    protected $di;
-    protected $slug;
-
-    public function __construct($di, $slug, $vars = null)
+    
+    public function __construct($di)
     {
-        $this->di = $di;
-        $this->slug = $slug;
-        $this->db = $this->di->get('Database', [DB_HOST, DB_NAME, DB_USER, DB_PASS]);
-        $this->init();
+        $this->db = new SqlDatabase(DB_HOST, DB_NAME, DB_USER, DB_PASS);
     }
 
-    public function init()
+    public function getList()
     {
-        // Base function
+        $this->title = ucfirst($this->table);
+        $this->list = $this->db->getAll("SELECT * FROM `$this->table`");
     }
 
-    public function hydrateModel($column = null)
+    public function getOneBy($column, $id)
     {
-        if (empty($this->slug)) {
-            $data = $this->getAll();
-            if ($data) $this->list = $data;
-            else return false;
-        } elseif (!is_array($this->slug) || count($this->slug) === 1) {
-            $data = $this->getOneBy($column, $this->slug);
-            if ($data) $this->extractToObject($data);
-            else return false;
-        } else return false;
+        $this->extractToObject( $this->db->getRow("SELECT * FROM `$this->table` WHERE `$column` = :id", array('id' => $id)) );
     }
 
-    protected function getAll()
+    public function create()
     {
-        return $this->db->getAll("SELECT * FROM `$this->table`");
+        $this->db->dbWrite(
+            "INSERT INTO `$this->table` (`url`, `title`, `content`) VALUES (:url, :title, :content);",
+            array('url' => $this->slugify($_POST['title']), 'title' => $_POST['title'], 'content' => $_POST['content'])
+        );
+        header("Location: $this->returnurl");exit;
     }
 
-    protected function getOneBy($column, $id)
+    public function update($id)
     {
-        return $this->db->getRow("SELECT * FROM `$this->table` WHERE `$column` = :id", array('id' => $id));
+        $this->db->dbWrite(
+            "UPDATE `$this->table` SET `title` = :title, `content` = :content WHERE `pages`.`pageid` = :id", 
+            array('title' => $_POST['title'], 'content' => $_POST['content'], 'id' => $id)
+        );
+        header("Location: $this->returnurl");exit;
     }
-
-    protected function map($column, $id)
+    
+    protected function slugify($string)
     {
-        $this->extractToObject($this->getOneBy($column, $id));
+        $string = preg_replace("/[^a-z0-9 ]/", "", strtolower($string));
+        return str_replace('-', '', trim($string));
     }
-
+    
     protected function extractToObject($array)
     {
         foreach ($array as $key => $value) $this->$key = $value;
-    }
-
-    protected function return404()
-    {
-        header("HTTP/1.0 404 Not Found");
-        echo '404 Page Not Found';
-        exit;
     }
 }

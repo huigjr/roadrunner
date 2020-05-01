@@ -10,45 +10,30 @@ class Router
     {
         $this->di = new DI();
         $this->di->get('Session');
-        $this->controller = $this->getController($this->parseUrlPath());
+        $this->controller = $this->getController($this->parse());
     }
 
-    // Check is URL structure meets requirements and return path parts
-    private function parseUrlPath()
+    private function parse()
     {
         if (isset($_GET['path'])) {
-            if (substr($_GET['path'], -1) === '/') $this->return404();
-            return explode('/', $_GET['path']);
-        } else return null;
+            return (substr($_GET['path'], -1) === '/') ? RedirectHelper::pageNotFound() : explode('/', $_GET['path']);
+        } else return ['/'];
     }
 
     private function getController($path)
     {
-        if ($path) {
-            if (count($path) === 1) {
-                return $this->startController($path[0]) ?? $this->startController('page', [$path]) ?? null;
-            } else {
-                $firstpath = array_shift($path);
-                return $this->startController($firstpath, $path) ?? null;
-            }
-        } else return $this->startController('page', '/');
-    }
-
-    private function startController($path, $array = null)
-    {
-        try {
-            $class = ucfirst($path) . 'Controller';
-            return new $class($this->di, $array);
-        } catch (Exception $e) {
-            return null;
+        if (count($path) === 1) {
+            return $this->startController($path[0]) ?? $this->startController('page', $path) ?? null;
+        } else {
+            $class = array_shift($path);
+            return $this->startController($class, $path) ?? null;
         }
     }
 
-    // Return 404 page in case routing cannot be resolved
-    private function return404()
+    private function startController($class, $slug = null)
     {
-        header("HTTP/1.0 404 Not Found");
-        echo '404 Page Not Found';
-        exit;
+        $class = ucfirst($class) . 'Controller';
+        return class_exists($class) ? new $class($this->di, $slug) : null;
     }
+
 }

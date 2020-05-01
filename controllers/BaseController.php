@@ -5,16 +5,14 @@ class BaseController
 
     protected $di;
     protected $slug;
-    protected $args;
     protected $model;
     protected $template;
     protected $view = 'default.html';
 
-    public function __construct($di, $slug, $args = null)
+    public function __construct($di, $slug)
     {
         $this->di = $di;
         $this->slug = $slug;
-        $this->args = $args;
         $this->template = TEMPLATE;
         $this->init();
     }
@@ -22,11 +20,6 @@ class BaseController
     public function init()
     {
         // Base function
-    }
-
-    public function createForm()
-    {
-        extract($this->model);
     }
 
     public function getTemplate()
