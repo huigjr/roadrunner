@@ -18,8 +18,9 @@ class DashboardController extends BaseController
                 if($_POST) $this->model->update($this->slug[1]);
                 $this->model->getOneBy($this->slug[0] . 'id', $this->slug[1]);
             } elseif($this->slug[1] === 'new'){
-                $this->model->title = 'New ' . $this->slug[0];
                 if($_POST) $this->model->create();
+                $this->model->title = 'New ' . $this->slug[0];
+                $this->model->content = '';
             }
         }
     }

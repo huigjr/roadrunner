@@ -33,9 +33,11 @@
 	<div class="screenright">
 		<div class="contentbox">
 			<h2>Pages</h2>
-      <?php foreach($list as $page):?>
-        <a href="dashboard/cms/<?=$page['pageid']?>"><?=$page['title']?></a>
-      <?php endforeach;?>
+            <?php foreach($list as $page):?>
+            <a href="dashboard/cms/<?=$page['pageid']?>"><?=$page['title']?></a><br>
+            <?php endforeach;?>
+            <br>
+            <a class="submit" href="dashboard/cms/new">New Page</a><br>
 		</div>
 	</div>
 
