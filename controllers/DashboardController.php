@@ -3,6 +3,8 @@
 class DashboardController extends BaseController
 {
 
+    protected $accesslevel = 0;
+
     public function init()
     {
         $this->template = 'admin';
@@ -32,10 +34,21 @@ class DashboardController extends BaseController
             $model->title = 'Dashboard';
             $model->content = '<h2>Dashboard</h2>';
         } else {
+            $this->authorizeModels($model);
             $model = $model === 'cms' ? $this->slug[0] = 'page' : $model;
             $model = ucfirst($model) . 'Model';
             $model = new $model($this->di);
         }
         return $model;
+    }
+    
+    private function authorizeModels($model)
+    {
+        $array = [
+            ['model' => 'page', 'access' => 0],
+            ['model' => 'blog', 'access' => 2],
+        ];
+        foreach($array as $item) if($item['model'] == $model) $this->accesslevel = $item['access'];
+        return $this->di->get('Security', [$this->di])->authorize($this->accesslevel);
     }
 }

@@ -33,7 +33,7 @@ class BaseModel
     public function update($id)
     {
         $this->db->dbWrite(
-            "UPDATE `$this->table` SET `title` = :title, `content` = :content WHERE `pages`.`pageid` = :id", 
+            "UPDATE `$this->table` SET `title` = :title, `content` = :content WHERE `".$this->table."id` = :id", 
             array('title' => $_POST['title'], 'content' => $_POST['content'], 'id' => $id)
         );
         header("Location: $this->returnurl");exit;
