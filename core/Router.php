@@ -17,7 +17,7 @@ class Router
     {
         if (isset($_GET['path'])) {
             return (substr($_GET['path'], -1) === '/') ? RedirectHelper::pageNotFound() : explode('/', $_GET['path']);
-        } else return ['/'];
+        } else return ['home'];
     }
 
     private function getController($path)

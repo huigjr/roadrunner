@@ -3,7 +3,7 @@
 class LoginController extends BaseController
 {
 
-    protected $view     = 'login.html';
+    protected $view = 'login.html';
 
     public function init()
     {

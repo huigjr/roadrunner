@@ -1,36 +1,52 @@
 <!DOCTYPE html>
-<html lang="NL">
+<html lang="EN">
 <head>
-	<title><?=$title?> | The KK Initiative</title>
+	<title>Blog | The KK Initiative</title>
 	<base href="/" target="_self">
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/style.css" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lato&display=swap" rel="stylesheet"> 
 </head>
 <body>
 
 <header>
-	<h1><?=$title?></h1>
+    <div>
+        <h1>The KK Initiative</h1>
+    </div>
+	<div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="blog">Blog</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div>
+        <a class="button-small" href="dashboard">Login</a>
+    </div>
 </header>
 
-<nav>
-	<ul>
-		<li><a href="/">Home</a></li>
-    <li><a href="blog">Blog</a></li>
-	</ul>
-</nav>
-
-<div class="content">
+<main>
+    <div class="itemlist">
+        <h2>Blog</h2>
+        <div class="blogitem">
 <?php foreach($list as $blog):?>
-    <a href="/blog/<?=$blog['url']?>"><?=$blog['title']?></a><br>
+            <h3><?=$blog['title']?></h3>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. 
+            Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, 
+            ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim...</p>
+            <a class="button-small" href="/blog/<?=$blog['url']?>">Read More</a>
 <?php endforeach;?>
-</div>
+        </div>
+    </div>
+    
+</main>
 
 <footer>
-<?=$executiontime?> 
+    <p>&copy; 2020 | <?=$executiontime?></p>
 </footer>
 
 </body>
