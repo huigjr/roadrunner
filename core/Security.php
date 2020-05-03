@@ -17,6 +17,7 @@ class Security
         If($accesslevel <= $this->session->getUserlevel()){
             return true;
         } else {
+            RedirectHelper::redirect('login');
             echo 'Not Authorized';
             exit;
         }

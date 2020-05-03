@@ -3,12 +3,15 @@
 class LoginController extends BaseController
 {
 
+    protected $view     = 'login.html';
+
     public function init()
     {
-        $this->model = new PageModel($this->di);
-        if(count($this->slug) === 1){
-            is_numeric($this->slug[0]) ? $this->model->getOneBy('pageid', $this->slug[0]) : $this->model->getOneBy('url', $this->slug[0]);
+        $this->template = 'admin';
+        if(empty($this->slug)){
+            $this->model = new stdClass();
+            $this->model->title = 'Login';
+            $this->model->content = '<h2>Login</h2>';
         }
     }
-
 }

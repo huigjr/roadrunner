@@ -3,7 +3,7 @@
 class DashboardController extends BaseController
 {
 
-    protected $accesslevel = 0;
+    protected $accesslevel = 1;
 
     public function init()
     {
@@ -45,7 +45,7 @@ class DashboardController extends BaseController
     private function authorizeModels($model)
     {
         $array = [
-            ['model' => 'page', 'access' => 0],
+            ['model' => 'page', 'access' => 1],
             ['model' => 'blog', 'access' => 2],
         ];
         foreach($array as $item) if($item['model'] == $model) $this->accesslevel = $item['access'];
